@@ -1,0 +1,26 @@
+<!-- COMENTÁRIO:
+  Dentro da partial todo conteúdo deve estar dentro de uma div .nested-fields
+-->
+<div class="nested-fields">
+  <div class="field">
+    <%= f.label :company %>
+    <%= f.text_field :company %>
+  </div>
+
+  <div class="field">
+    <%= f.label :occupation %>
+    <%= f.text_field :occupation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :period %>
+    <%= f.text_field :period %>
+  </div>
+  <!-- COMENTÁRIO:
+    link_to_remove_association é o helper que o cocoon nos fornece para deletar algum nested
+  -->
+  <%= link_to_remove_association "remove experience", f %>
+
+  <br><br><br>
+</div>
+

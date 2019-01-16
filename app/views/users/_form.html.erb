@@ -1,0 +1,46 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :user_name %>
+  </div>
+
+  <h4>Experiences</h4>
+  <!-- COMENTÁRIO:
+    O cocoon exige que seu nested_form esteja dentro de uma div com id "nome_do_seu_nested_no_plural"
+    no nosso caso #experiences
+  -->
+  <div id="experiences">
+    <%= form.fields_for :experiences do |experience| %>
+      <!-- COMENTÁRIO:
+        é uma exigencia também que os campos do seu nested esteja numa partial "nome_do_seu_nested_no_singular_fields"
+        no nosso caso _experience_fields.html.erb
+      -->
+      <%= render 'experience_fields', f: experience %>
+    <% end %>
+
+    <!-- COMENTÁRIO:
+      O link para adicionar dinamicamente os fields deve estar dentro de uma div .links
+    -->
+    <div class="links">
+      <!-- COMENTÁRIO: O link_to_add_association é um helper provido pela gem -->
+      <%= link_to_add_association 'add experience', form, :experiences %>
+      <br><br>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
